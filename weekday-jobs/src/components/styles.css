@@ -1,0 +1,52 @@
+.lexend-738345b2{
+    font-family: "Lexend", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+}
+
+.company-logo{
+    width: 50px;
+    height: 50px;
+}
+
+.card-header{
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+#apply-btn{
+    width: 384px;
+    background-color: rgb(85, 239, 196);
+    color: rgb(0, 0, 0);
+    font-weight: 500;
+    padding: 8px 18px;
+}
+
+.sidebar-box {
+    max-height: 350px;
+    position: relative;
+    overflow: hidden;
+}
+.sidebar-box .show-more { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0;
+    width: 100%; 
+    text-align: center; 
+    margin: 0; 
+    padding: 80px 0; 
+    text-decoration: none;
+    background-image: linear-gradient(to bottom, transparent, white);
+}
+
+#view-btn{
+    color: #4943da;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    border: none;
+    cursor: pointer;
+    overflow: hidden;
+    outline: none;
+}

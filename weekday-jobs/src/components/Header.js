@@ -1,6 +1,6 @@
 
 const Header = () => {
-    return <div>Search jobs</div>
+    return <div>search jobs</div>
 };
 
 export default Header;
