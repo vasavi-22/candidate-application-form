@@ -16,6 +16,10 @@
     align-items: center;
 }
 
+.card-body{
+    position: relative;
+}
+
 #apply-btn{
     width: 384px;
     background-color: rgb(85, 239, 196);
@@ -49,4 +53,15 @@
     cursor: pointer;
     overflow: hidden;
     outline: none;
+}
+
+.filters-tab{
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    padding: 20px;
+}
+
+#demo-simple-select{
+    min-width: 120PX;
 }

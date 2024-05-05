@@ -8,6 +8,7 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import "./styles.css";
 
+//Modal box styles
 const style = {
     position: 'absolute',
     top: '50%',
@@ -23,13 +24,16 @@ const style = {
 };
 
 const JobCard = ({job}) => {
+
+    //Modal box essentials to display modal when we click on show more on job description
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
-    
+
+    //Destructuring the intermediate values from props (job)
     const {companyName, jobRole, location, maxJdSalary, minJdSalary, jobDetailsFromCompany, minExp} = job;
     
-
+    //Formatting salary for User Interface
     const findSalary = (maxJdSalary, minJdSalary) => {
         if(maxJdSalary!=null && minJdSalary!=null){
             return <p style={{display:"inline"}}>{minJdSalary} - {maxJdSalary}</p>
@@ -47,6 +51,7 @@ const JobCard = ({job}) => {
 
     return(
         <Card sx={{ maxdWidth: "275px"}} style={{width: "400px"}}>
+            {/* Job Related content */}
             <CardContent>
                 <div className="card-header">
                     <div>
@@ -64,7 +69,7 @@ const JobCard = ({job}) => {
                         <h3>About Company:</h3>
                         <h4>About us</h4>
                         <p>{jobDetailsFromCompany}</p>
-                        <p class="show-more"><button id="view-btn" onClick={handleOpen}>Show more</button></p>
+                        <p className="show-more"><button id="view-btn" onClick={handleOpen}>Show more</button></p>
                         <Modal
                             open={open}
                             onClose={handleClose}
@@ -82,11 +87,13 @@ const JobCard = ({job}) => {
                             </Box>
                         </Modal>
                     </div>
-                    <div>
-                        {minExp ? <span>Minimum Experience<p>{minExp} years</p></span> : ''}
+                    <div className="exp">
+                        {minExp ? <span>Minimum Experience<p>{minExp} years</p></span> : <p></p>}
                     </div>
                 </div>
             </CardContent>
+
+            {/* Apply Button */}
             <CardActions>
                 <Button variant="contained" size="medium" id="apply-btn" disableRipple>Easy Apply</Button>
             </CardActions>
