@@ -50,9 +50,11 @@ const JobCard = ({job}) => {
     };
 
     return(
-        <Card sx={{ maxdWidth: "275px"}} style={{width: "400px"}}>
+        <Card sx={{ maxWidth: "400px"}} className="job-card" 
+        // style={{position: "relative", display: "flex", flexDirection: "column"}}
+        >
             {/* Job Related content */}
-            <CardContent>
+            <CardContent style={{flexGrow: "1"}}>
                 <div className="card-header">
                     <div>
                         <img className="company-logo" src={job.logoUrl} alt="logo"/>
@@ -94,7 +96,7 @@ const JobCard = ({job}) => {
             </CardContent>
 
             {/* Apply Button */}
-            <CardActions>
+            <CardActions style={{marginTop: "auto"}}>
                 <Button variant="contained" size="medium" id="apply-btn" disableRipple>Easy Apply</Button>
             </CardActions>
         </Card>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react";
+import Header from "./Header";
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
@@ -16,6 +17,8 @@ const Body = () => {
     //Jobs data fetched from th API
     const [jobsData, setJobsData] = useState([]);
     const [filteredJobs, setFilteredJobs] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
+    const [isAllDataFetched, setIsAllDataFetched] = useState(false);
 
     //state variables used for filters
     const [experience, setExperience] = useState('');
@@ -25,20 +28,6 @@ const Body = () => {
     const [tech, setTech] = useState('');
     const [role, setRole] = useState('');
     const [pay, setPay] = useState('');
-
-    const myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    const body = JSON.stringify({
-        "limit": 10,
-        "offset": 0
-    });
-       
-    const requestOptions = {
-        method: "POST",
-        headers: myHeaders,
-        body
-    };
 
     //Fetching jobs data from the API
     useEffect(() => {
@@ -50,15 +39,52 @@ const Body = () => {
         fetchJobs();
     },[name, location, experience, role, pay]);
 
+    //Fetching data when we scroll down (Infinite scroll)
+    useEffect(() => {
+        const handleScroll = () => {
+            if (
+                window.innerHeight + document.documentElement.scrollTop === document.documentElement.offsetHeight
+                && !isLoading
+                && !isAllDataFetched // Check if all data is not fetched yet
+            ) {
+                fetchData();
+            }
+        };
+    
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [isLoading, isAllDataFetched]);
+
     const fetchData = () => {
+        setIsLoading(true);
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+        const body = JSON.stringify({
+            "limit": 10,
+            "offset": filteredJobs.length
+        });
+       
+        const requestOptions = {
+            method: "POST",
+            headers: myHeaders,
+            body
+        };
+
         fetch("https://api.weekday.technology/adhoc/getSampleJdJSON", requestOptions)
         .then((response) => response.json())
         .then((result) => {
-            setJobsCount(result.totalCount)
-            setJobsData(result.jdList)
-            setFilteredJobs(result.jdList)
+             // Check if all jobs are fetched
+            if (filteredJobs.length + result.jdList.length >= result.totalCount) {
+                setIsAllDataFetched(true); // Set a state to indicate all data is fetched
+            }
+
+            setJobsCount(result.totalCount);
+            setJobsData((prevData) => [...prevData, ...result.jdList]);
+            setFilteredJobs((prevData) => [...prevData, ...result.jdList]);
+            setIsLoading(false);
         })
         .catch((error) => console.error(error));
+
     };
 
     const fetchJobs = () => {
@@ -83,10 +109,12 @@ const Body = () => {
 
         });
         setFilteredJobs(filtered);
+        setJobsCount(filtered.length);
     };
     
     return(
         <div>
+            <Header count={jobsCount}/>
 
             {/* Filters */}
             <div className="filters-tab">
@@ -230,11 +258,21 @@ const Body = () => {
             </div>
 
             {/* Map through each job to display it in Job Card */}
-            <div style={{display:"flex", gap:"30px", flexWrap: "wrap", justifyContent:"center"}}>
+            <div className="jobs-container" >
                 {
-                    filteredJobs.map((item) => {
-                        return <JobCard key={item.jdUid} job={item}/>
-                    })
+                    filteredJobs.length === 0 && isLoading === false ? 
+                        <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                            <img src="https://jobs.weekday.works/_next/static/media/nothing-found.4d8f334c.png" width="150px" height="150px" />
+                            <h4>No Jobs available for this category at this moment</h4>
+                        </div> : 
+                    <>
+                        {
+                        filteredJobs.map((item, index) => {
+                            return <JobCard key={index} job={item}/>
+                        })
+                        }
+                        {/* {isLoading && <div>Loading...</div>} */}
+                    </>
                 }
             </div>
         </div>
