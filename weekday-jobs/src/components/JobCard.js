@@ -50,8 +50,8 @@ const JobCard = ({job}) => {
     };
 
     return(
-        <Card sx={{ maxWidth: "400px"}} className="job-card" 
-        // style={{position: "relative", display: "flex", flexDirection: "column"}}
+        <Card sx={{ maxWidth: "360px"}} className="job-card" 
+        style={{borderRadius: 20}}
         >
             {/* Job Related content */}
             <CardContent style={{flexGrow: "1"}}>
@@ -66,7 +66,7 @@ const JobCard = ({job}) => {
                     </div>
                 </div>
                 <div className="card-body">
-                    <span>Estimated Salary: &#8377; {findSalary(maxJdSalary, minJdSalary)} LPA</span>
+                    <span>Estimated Salary: &#8377; {findSalary(maxJdSalary, minJdSalary)} LPA ✅</span>
                     <div className="sidebar-box">
                         <h3>About Company:</h3>
                         <h4>About us</h4>
@@ -97,7 +97,7 @@ const JobCard = ({job}) => {
 
             {/* Apply Button */}
             <CardActions style={{marginTop: "auto"}}>
-                <Button variant="contained" size="medium" id="apply-btn" disableRipple>Easy Apply</Button>
+                <Button variant="contained" size="medium" id="apply-btn" disableRipple>⚡ Easy Apply</Button>
             </CardActions>
         </Card>
     )

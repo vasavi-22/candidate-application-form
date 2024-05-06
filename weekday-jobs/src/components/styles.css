@@ -1,3 +1,11 @@
+body{
+    font-family: 'Lexend';
+}
+
+#outlined-basic{
+    font-family: 'Lexend' !important;
+}
+
 .lexend-738345b2{
     font-family: "Lexend", sans-serif;
     font-optical-sizing: auto;
@@ -38,6 +46,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 1px 4px 0px !important;
 }
 
 .company-logo{
@@ -61,6 +70,7 @@
     color: rgb(0, 0, 0);
     font-weight: 500;
     padding: 8px 18px;
+    border-radius: 8px;
 }
 
 .sidebar-box {

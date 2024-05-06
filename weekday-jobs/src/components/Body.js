@@ -7,6 +7,7 @@ import Select from '@mui/material/Select';
 import { IconButton } from '@mui/material';
 import ClearIcon from '@mui/icons-material/Clear';
 import TextField from '@mui/material/TextField';
+import Typography from '@mui/material/Typography';
 import JobCard from "./JobCard";
 import "./styles.css";
 
@@ -119,7 +120,7 @@ const Body = () => {
             {/* Filters */}
             <div className="filters-tab">
             <FormControl>
-                <InputLabel id="demo-simple-select-label">Experience</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{fontFamily:'Lexend'}}>Experience</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -148,16 +149,27 @@ const Body = () => {
                     <MenuItem value={10}>10</MenuItem>
                 </Select>
             </FormControl>
-            <TextField id="outlined-basic" label="Company name" variant="outlined" value={name} 
+            <TextField id="outlined-basic" 
+            label={
+                <span style={{ fontFamily: 'Lexend' }}>Company name</span>
+            }
+            variant="outlined" value={name} 
             onChange={(e) => {
                 setName(e.target.value);
             }}
+            style={{fontFamily:'Lexend'}}
             />
-            <TextField id="outlined-basic" label="Location" variant="outlined" value={location} onChange={(e) => {
+            <TextField id="outlined-basic" 
+            label={
+                <span style={{ fontFamily: 'Lexend' }}>Location</span>
+            }
+            variant="outlined" value={location} onChange={(e) => {
                 setLocation(e.target.value)
-            }} />
+            }} 
+            style={{fontFamily:'Lexend'}}
+            />
             <FormControl>
-                <InputLabel id="demo-simple-select-label">Remote/on-site</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{fontFamily:'Lexend'}}>Remote/on-site</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -180,7 +192,7 @@ const Body = () => {
                 </Select>
             </FormControl>
             <FormControl>
-                <InputLabel id="demo-simple-select-label">Tech stack</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{fontFamily:'Lexend'}}>Tech stack</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -202,8 +214,8 @@ const Body = () => {
                     <MenuItem value={"java"}>Java</MenuItem>
                 </Select>
             </FormControl>
-            <FormControl>
-                <InputLabel id="demo-simple-select-label">Role</InputLabel>
+            <FormControl style={{fontFamily:'Lexend'}}>
+                <InputLabel id="demo-simple-select-label" style={{fontFamily:'Lexend'}}>Role</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -229,7 +241,7 @@ const Body = () => {
                 </Select>
             </FormControl>
             <FormControl>
-                <InputLabel id="demo-simple-select-label">Min base pay</InputLabel>
+                <InputLabel id="demo-simple-select-label" style={{fontFamily:'Lexend'}}>Min base pay</InputLabel>
                 <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
